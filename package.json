@@ -141,6 +141,11 @@
     "zod": "^4.4.3"
   },
   "resolutions": {
+    "@img/sharp-win32-arm64": "npm:empty-npm-package@^1.0.0",
+    "@img/sharp-win32-ia32": "npm:empty-npm-package@^1.0.0",
+    "@img/sharp-win32-x64": "npm:empty-npm-package@^1.0.0",
+    "@img/sharp-darwin-arm64": "npm:empty-npm-package@^1.0.0",
+    "@img/sharp-darwin-x64": "npm:empty-npm-package@^1.0.0",
     "axios": ">=0.21.1",
     "esbuild": "^0.25.0",
     "flatted": "^3.4.2",
