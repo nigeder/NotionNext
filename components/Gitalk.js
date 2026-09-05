@@ -16,6 +16,8 @@ const Gitalk = ({ frontMatter }) => {
   const owner = siteConfig('COMMENT_GITALK_OWNER')
   const admin = siteConfig('COMMENT_GITALK_ADMIN').split(',')
   const distractionFreeMode = siteConfig('COMMENT_GITALK_DISTRACTION_FREE_MODE')
+  const proxy = siteConfig('COMMENT_GITALK_PROXY')
+  const proxyGithubApi = siteConfig('COMMENT_GITALK_PROXY_GITHUB_API')
 
   const loadGitalk = async() => {
     await loadExternalResource(gitalkCSSCDN, 'css')
@@ -26,15 +28,21 @@ const Gitalk = ({ frontMatter }) => {
       console.warn('Gitalk 初始化失败')
       return
     }
-    const gitalk = new Gitalk({
+    const gitalkOptions = {
       clientID: clientId,
       clientSecret: clientSecret,
       repo: repo,
       owner: owner,
       admin: admin,
       id: frontMatter.id, // Ensure uniqueness and length less than 50
-      distractionFreeMode: distractionFreeMode // Facebook-like distraction free mode
-    })
+      distractionFreeMode: distractionFreeMode, // Facebook-like distraction free mode
+      proxy: proxy // GitHub oauth request reverse proxy for CORS
+    }
+    // 仅当配置了 GitHub API 代理时才传入，避免空值覆盖 fork 默认的 https://api.github.com
+    if (proxyGithubApi) {
+      gitalkOptions.proxyGithubApi = proxyGithubApi
+    }
+    const gitalk = new Gitalk(gitalkOptions)
 
     gitalk.render('gitalk-container')
   }
