@@ -70,13 +70,15 @@ module.exports = {
   COMMENT_GITALK_DISTRACTION_FREE_MODE: false, // 类似facebook的无干扰模式
   COMMENT_GITALK_JS_CDN_URL:
     process.env.NEXT_PUBLIC_COMMENT_GITALK_JS_CDN_URL ||
-    'https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', // gitalk客户端 js cdn
+    'https://cdn.jsdelivr.net/gh/yanshenxian/gitalk@master/dist/gitalk.min.js', // gitalk客户端 js cdn；默认使用支持 proxyGithubApi 的 fork 版本，如需原版可改回 https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js
   COMMENT_GITALK_CSS_CDN_URL:
     process.env.NEXT_PUBLIC_COMMENT_GITALK_CSS_CDN_URL ||
     'https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css', // gitalk客户端 css cdn
   COMMENT_GITALK_PROXY:
     process.env.NEXT_PUBLIC_COMMENT_GITALK_PROXY ||
-    'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token', // gitalk客户端 proxy
+    'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token', // gitalk客户端 proxy，仅用于 OAuth access_token 请求的 CORS 代理
+  COMMENT_GITALK_PROXY_GITHUB_API:
+    process.env.NEXT_PUBLIC_COMMENT_GITALK_PROXY_GITHUB_API || '', // GitHub API 反向代理地址（如 https://your-worker.workers.dev），解决国内无法直连 api.github.com 导致的 Network Error；留空则直连 https://api.github.com
 
   COMMENT_GITTER_ROOM: process.env.NEXT_PUBLIC_COMMENT_GITTER_ROOM || '', // gitter聊天室 see https://gitter.im/ 不需要则留空
   COMMENT_DAO_VOICE_ID: process.env.NEXT_PUBLIC_COMMENT_DAO_VOICE_ID || '', // DaoVoice http://dashboard.daovoice.io/get-started
